@@ -19,7 +19,7 @@ Always follow the testing conventions from `.github/copilot-instructions.md` (Te
 
 ## Behaviour
 
-1. **Read the target** — `readFile` the file or function to be tested in full.
+1. **Read the target** — `read_file` the file or function to be tested in full.
 2. **Detect framework**:
    - Search `*.csproj` for `xunit`, `nunit`, or `mstest`.
    - Search `package.json` for `jest`, `vitest`, or `@testing-library`.

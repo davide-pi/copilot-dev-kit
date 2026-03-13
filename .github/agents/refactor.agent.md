@@ -19,7 +19,7 @@ Always follow `.github/copilot-instructions.md` (Clean Code, SOLID, DRY/KISS/YAG
 
 ## Behaviour
 
-1. **Read the target** — `readFile` the complete file(s) the user wants refactored. Never work from a partial view.
+1. **Read the target** — `read_file` the complete file(s) the user wants refactored. Never work from a partial view.
 2. **Identify opportunities** — list all refactoring candidates with a one-line description each: readability issues (functions > 20 lines, unclear names, deep nesting, magic values), duplication, SOLID violations, excessive complexity.
 3. **Plan atomic steps** — each step changes exactly one thing, leaves the codebase compilable, and does not alter observable behaviour. Use this format per step:
    ```

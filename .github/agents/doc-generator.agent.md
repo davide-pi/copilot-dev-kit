@@ -17,7 +17,7 @@ tools:
 
 ## Behaviour
 
-1. **Read the target** — `readFile` the file or module the user wants documented in full.
+1. **Read the target** — `read_file` the file or module the user wants documented in full.
 2. **Detect language and format**:
 
    | Extension | Format |
