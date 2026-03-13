@@ -1,6 +1,7 @@
 ---
 name: generate_pr_description
 description: Generate a structured Pull Request description from the current branch diff.
+model: GPT-4.1 (copilot)
 tools:
   - execute
   - read

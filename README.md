@@ -64,6 +64,7 @@ your-project/
     │   ├── planning.instructions.md                ← planning & decomposition rules
     │   ├── csharp.instructions.md                  ← C# / ASP.NET Core conventions
     │   ├── javascript-typescript.instructions.md   ← JS/TS/React/Angular conventions
+    │   ├── pipeline.instructions.md                ← CI/CD pipeline conventions (all platforms)
     │   ├── code-review.instructions.md             ← severity model & output format (all languages)
     │   ├── code-review-csharp.instructions.md      ← severity assignments for C#-specific violations
     │   └── code-review-js-ts.instructions.md       ← severity assignments for JS/TS-specific violations
@@ -76,12 +77,7 @@ your-project/
     │   ├── clean-architecture.SKILL.md             ← Clean Architecture knowledge package
     │   └── testing.SKILL.md                        ← testing strategy knowledge package
     └── prompts/
-        ├── code-review.prompt.md                   ← structured code review slash command
         ├── pr-description.prompt.md                ← PR description from git diff
-        ├── commit-message.prompt.md                ← Conventional Commits message
-        ├── test-writer.prompt.md                   ← unit/integration test generation
-        ├── refactor.prompt.md                      ← guided step-by-step refactoring
-        ├── doc-generator.prompt.md                 ← XML docs / TSDoc / JSDoc / README
         └── breaking-change-analysis.prompt.md      ← breaking change detection
 ```
 
@@ -103,13 +99,15 @@ For scoped rules that only apply to specific file types (e.g. `**/*.cs`), use `.
 
 Copy `.agent.md` files into `.github/agents/`. In VS Code, open Copilot Chat and select the agent from the mode picker (the dropdown next to the chat input). Each agent file defines its name, description, available tools, and system prompt.
 
+Code review, refactoring, test generation, and documentation workflows are fully covered by agents — no separate prompt files are needed for these.
+
 ### Skills
 
 Copy `SKILL.md` files into `.github/skills/`. Skills package domain knowledge that agents can reference — Copilot will surface them as available capabilities when composing agent workflows.
 
 ### Prompts
 
-Copy `.prompt.md` files into `.github/prompts/`. They appear as `/` slash commands in Copilot Chat. Each file can include a description and input variables, making them reusable across projects.
+Copy `.prompt.md` files into `.github/prompts/`. They appear as slash commands in Copilot Chat. Only lightweight, one-shot workflows that don't require a persistent agent session live here.
 
 ---
 
@@ -123,6 +121,7 @@ Copy `.prompt.md` files into `.github/prompts/`. They appear as `/` slash comman
 | **planning.instructions.md** | always on | Decomposes work into atomic steps with dependency schema and implementation-ordered summary |
 | **csharp.instructions.md** | `**/*.cs` | Naming, async/await, nullable, records, DI, ASP.NET Core API conventions |
 | **javascript-typescript.instructions.md** | `**/*.{js,ts,jsx,tsx}` | TypeScript strict mode, React hooks, Angular signals/OnPush, import order |
+| **pipeline.instructions.md** | `**/*.{yml,yaml}` | CI/CD conventions: scripts over platform tasks, reusable templates, readability, secrets, fail-fast, security |
 | **code-review.instructions.md** | always on | Severity model (CRITICAL / IMPORTANT / SUGGESTION) and finding output format |
 | **code-review-csharp.instructions.md** | `**/*.cs` | Maps C# violations (async, DI lifetimes, nullable, LINQ, security) to severity levels; delegates conventions to `csharp.instructions.md` |
 | **code-review-js-ts.instructions.md** | `**/*.{js,ts,jsx,tsx}` | Maps JS/TS violations (strict TS, React hooks, Angular, XSS) to severity levels; delegates conventions to `javascript-typescript.instructions.md` |
@@ -147,12 +146,7 @@ Copy `.prompt.md` files into `.github/prompts/`. They appear as `/` slash comman
 
 | Name | What it does |
 |---|---|
-| **code-review** | Structured code review — full file or diff, C# and JS/TS |
 | **pr-description** | Generates PR description (context, changes, breaking changes, checklist) from `git diff` |
-| **commit-message** | Conventional Commits message from staged changes |
-| **test-writer** | Generates unit/integration tests with coverage rationale and edge cases |
-| **refactor** | Guided step-by-step refactoring with rationale for each atomic change |
-| **doc-generator** | XML docs / TSDoc / JSDoc and module README generation |
 | **breaking-change-analysis** | Identifies breaking changes in a diff with impact and migration path |
 
 ---

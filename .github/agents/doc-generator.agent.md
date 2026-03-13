@@ -1,6 +1,7 @@
 ---
 name: doc-generator
 description: Documentation generator agent. Generates and updates XML docs (C#), TSDoc/JSDoc (JS/TS), and module-level READMEs for existing code.
+model: GPT-4.1 (copilot)
 tools:
   - agent
   - edit
