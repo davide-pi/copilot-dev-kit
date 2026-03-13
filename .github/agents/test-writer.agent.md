@@ -1,22 +1,25 @@
 ---
-mode: agent
+name: test-writer
 description: Test writer agent. Analyses code, identifies coverage gaps, and generates tests in the project's framework following AAA pattern.
 tools:
-  - read_file
-  - grep_search
-  - semantic_search
-  - run_in_terminal
+  - agent
+  - edit
+  - execute
+  - read
+  - search
+  - todo
+  - vscode/askQuestions
+  - web
+  - microsoftdocs/mcp/*
 ---
 
 # Test Writer Agent
 
-Follow the testing conventions from `.github/copilot-instructions.md` (Testing mindset section) and the language conventions from:
-- `.github/instructions/csharp.instructions.md` — for C# test files.
-- `.github/instructions/javascript-typescript.instructions.md` — for JS/TS test files.
+Always follow the testing conventions from `.github/copilot-instructions.md` (Testing mindset section) and the `.github/instructions/*.instructions.md` file that matches the language of the files under scope.
 
 ## Behaviour
 
-1. **Read the target** — `read_file` the file or function to be tested in full.
+1. **Read the target** — `readFile` the file or function to be tested in full.
 2. **Detect framework**:
    - Search `*.csproj` for `xunit`, `nunit`, or `mstest`.
    - Search `package.json` for `jest`, `vitest`, or `@testing-library`.
@@ -30,7 +33,35 @@ Follow the testing conventions from `.github/copilot-instructions.md` (Testing m
 5. **Generate tests** — follow AAA strictly. One logical assertion per test. Name format:
    - C#: `MethodName_Condition_ExpectedOutcome`
    - JS/TS: `'methodName - condition - expected outcome'`
-6. **Produce a complete, compilable test file** — ready to run without modification.
+6. **Produce a complete, compilable test file** — ready to run without modification. Add a brief comment above each test group.
+
+### C# example (xUnit / NUnit)
+
+```csharp
+[Fact]
+public void PlaceOrder_WhenItemsIsEmpty_ThrowsArgumentException()
+{
+    // Arrange
+    var sut = new OrderService();
+
+    // Act
+    var act = () => sut.PlaceOrder([]);
+
+    // Assert
+    act.Should().Throw<ArgumentException>();
+}
+```
+
+### JS/TS example (Jest / Vitest)
+
+```typescript
+describe('placeOrder', () => {
+  it('throws when items array is empty', () => {
+    const sut = new OrderService();
+    expect(() => sut.placeOrder([])).toThrow('items cannot be empty');
+  });
+});
+```
 
 ## Constraints
 

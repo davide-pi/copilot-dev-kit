@@ -1,10 +1,12 @@
 ---
-mode: agent
+name: analyze_breaking_changes
 description: Analyse a diff or list of changes and identify breaking changes to public API surfaces, contracts, events, and serialization.
 tools:
-  - run_in_terminal
-  - read_file
-  - grep_search
+  - read
+  - execute
+  - search
+  - vscode/askQuestions
+  - web
 ---
 
 # Breaking Change Analysis

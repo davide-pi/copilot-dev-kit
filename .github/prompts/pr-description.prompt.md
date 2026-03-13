@@ -1,8 +1,12 @@
 ---
-mode: agent
+name: generate_pr_description
 description: Generate a structured Pull Request description from the current branch diff.
 tools:
-  - run_in_terminal
+  - execute
+  - read
+  - search
+  - vscode/askQuestions
+  - web
 ---
 
 # PR Description Generator
