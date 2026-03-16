@@ -64,3 +64,12 @@ These rules apply to every file in this repository, regardless of language or fr
 - Apply the principle of least privilege: request only the permissions actually needed.
 - Treat third-party dependencies as untrusted: pin versions, audit regularly.
 - Refer to the OWASP Top 10 as the baseline for web security threats.
+
+---
+
+## Clarification
+
+- Ask before acting when a request is ambiguous and different interpretations would lead to meaningfully different solutions.
+- Multiple questions are fine when there are several genuine doubts.
+- Only ask if the answer would actually change the outcome; otherwise state the assumption and proceed.
+- For every question asked, pre-populate the most likely and sensible answer(s) as a suggestion, so the user can confirm or override rather than answer from scratch.
