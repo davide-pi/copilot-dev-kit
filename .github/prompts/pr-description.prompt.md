@@ -1,7 +1,6 @@
 ---
 name: generate_pr_description
 description: Generate a structured Pull Request description from the current branch diff.
-model: GPT-4.1 (copilot)
 tools:
   - execute
   - read
@@ -11,6 +10,12 @@ tools:
 ---
 
 # PR Description Generator
+
+Generate a structured PR description from the current branch diff.
+
+## Inputs
+
+- Base branch (defaults to `origin/main`; use `$BASE` to override).
 
 ## Step 1 – Gather diff
 

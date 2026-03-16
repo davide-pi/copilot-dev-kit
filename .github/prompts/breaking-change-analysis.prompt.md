@@ -11,6 +11,12 @@ tools:
 
 # Breaking Change Analysis
 
+Analyse a diff or set of changes and produce a structured breaking-change report.
+
+## Inputs
+
+- Diff: provided directly, or retrieved via `git diff origin/main...HEAD` (use `$BASE` to override).
+
 ## Step 1 – Gather the diff
 
 Run `git diff origin/main...HEAD` (or `$BASE` if specified).

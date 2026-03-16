@@ -36,11 +36,11 @@ Label every test class or file with its level to make execution scope explicit.
 
 ### Guidelines
 
-- **Default to L0/L1.** The vast majority of tests should be L0 or L1 — fast, deterministic, no infrastructure needed.
-- **L2 requires a local environment** (e.g. Docker Compose, LocalDB). Gate these in CI behind a dedicated step.
-- **L3 requires a deployed environment.** Use for smoke tests and contract validation after a deployment.
-- **L4 is restricted.** Run only in controlled pipelines. Never delete, mutate, or depend on specific production data.
-- Mark test projects or files clearly, e.g. with a trait/category attribute:
+- **L0/L1 are the baseline.** The vast majority of tests are L0 or L1 — fast, deterministic, no infrastructure needed.
+- **L2 requires a local environment** (e.g. Docker Compose, LocalDB); typically gated in CI behind a dedicated step.
+- **L3 requires a deployed environment.** Well-suited for smoke tests and contract validation post-deployment.
+- **L4 is restricted** to controlled pipelines only. L4 tests must not delete, mutate, or depend on specific production data.
+- Test projects and files are marked with their level via a trait/category attribute:
 
 ```csharp
 // C# — xUnit trait
@@ -77,7 +77,7 @@ public async Task PlaceOrder_WhenItemsIsEmpty_ThrowsArgumentException()
 
 Rules:
 - One logical assertion per test (multiple `Should()` calls on the same result are fine).
-- Never put logic (`if`, loops) inside a test body.
+- No logic (`if`, loops) inside test bodies.
 - Never share mutable state between tests.
 
 ---

@@ -24,8 +24,6 @@ These rules apply to all JS/TS files in addition to the language-agnostic rules 
 - Variables, functions, parameters: `camelCase`.
 - Classes, interfaces, type aliases, enums: `PascalCase`.
 - Constants (module-level, never reassigned): `SCREAMING_SNAKE_CASE`.
-- React components: `PascalCase` — file name matches component name.
-- Angular services, components, pipes, directives: `PascalCase` with suffix — `UserService`, `UserComponent`.
 - Boolean variables and functions: prefix with `is`, `has`, `can`, `should` — `isLoading`, `hasError`.
 
 ---
@@ -34,7 +32,6 @@ These rules apply to all JS/TS files in addition to the language-agnostic rules 
 
 - Always use `async/await` over raw Promises and `.then()` chains.
 - Always handle rejections: wrap in `try/catch` or propagate explicitly.
-- Never use `async` in `useEffect` directly; extract an inner async function or use a custom hook.
 - Type Promise results explicitly: `Promise<User>`, not `Promise<any>`.
 
 ---
@@ -49,29 +46,6 @@ Organise imports in this order, separated by a blank line:
 4. Relative imports (`../utils`, `./helpers`)
 
 Remove unused imports immediately; do not leave them commented out.
-
----
-
-## React
-
-- Prefer function components with hooks; never use class components in new code.
-- Extract logic into custom hooks (`use` prefix) when a component exceeds ~50 lines or reuses stateful logic.
-- Follow the Rules of Hooks: only call hooks at the top level; never inside conditions or loops.
-- Declare `useEffect` dependencies exhaustively; never suppress the `exhaustive-deps` lint rule.
-- Avoid prop drilling beyond two levels — use context or a state manager.
-- Memoize expensive computations with `useMemo`; stabilise callbacks with `useCallback` only when necessary (not by default).
-- Keep components pure: no side effects during render.
-
----
-
-## Angular
-
-- Use `inject()` function instead of constructor injection for new components and services.
-- Prefer `Signal`-based state (`signal`, `computed`, `effect`) over `BehaviorSubject` for local state.
-- Use `OnPush` change detection strategy for all components.
-- Unsubscribe from Observables using `takeUntilDestroyed()` or the `async` pipe; never leave subscriptions open.
-- Services should be `providedIn: 'root'` unless explicitly scoped to a feature module.
-- Avoid logic in templates beyond simple bindings; move conditions and transformations to the component class.
 
 ---
 

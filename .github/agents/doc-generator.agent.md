@@ -1,7 +1,6 @@
 ---
 name: doc-generator
-description: Documentation generator agent. Generates and updates XML docs (C#), TSDoc/JSDoc (JS/TS), and module-level READMEs for existing code.
-model: GPT-4.1 (copilot)
+description: Documentation generator for XML docs (C#), TSDoc/JSDoc (JS/TS), and module-level READMEs.
 tools:
   - agent
   - edit
@@ -15,20 +14,27 @@ tools:
 
 # Documentation Generator Agent
 
-## Behaviour
+## Orient
 
-1. **Read the target** — `read_file` the file or module the user wants documented in full.
-2. **Detect language and format**:
+Detect language from file extension:
 
-   | Extension | Format |
-   |-----------|--------|
-   | `.cs` | XML documentation comments (`/// <summary>`) |
-   | `.ts` / `.tsx` | TSDoc (`/** @param … @returns … */`) |
-   | `.js` / `.jsx` | JSDoc (`/** @param {Type} … */`) |
+| Extension | Format |
+|-----------|--------|
+| `.cs` | XML documentation comments (`/// <summary>`) |
+| `.ts` / `.tsx` | TSDoc (`/** @param … @returns … */`) |
+| `.js` / `.jsx` | JSDoc (`/** @param {Type} … */`) |
 
-3. **Identify gaps** — list every exported / public member that lacks documentation or has outdated documentation.
-4. **Generate documentation** — add or update doc comments for each gap following the rules below.
-5. **Output the complete updated file** (doc changes only — no logic changes).
+## Understand
+
+`read_file` the complete file or module.
+
+## Analyse
+
+List every exported / public member that lacks documentation or has outdated documentation.
+
+## Output
+
+Add or update doc comments for each gap following the rules below. Produce the complete updated file — doc changes only, no logic changes.
 
 ## C# XML Docs rules
 

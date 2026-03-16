@@ -30,19 +30,6 @@ Apply the conventions from `javascript-typescript.instructions.md` with the seve
 - Hardcoded secrets or tokens → **[CRITICAL]**
 - `console.log` with sensitive data in production → **[IMPORTANT]**
 
-**React**
-- Hook inside condition, loop, or nested function (Rules of Hooks) → **[CRITICAL]**
-- Direct state mutation → **[CRITICAL]**
-- Missing dependency in `useEffect`/`useCallback`/`useMemo` → **[IMPORTANT]**
-- Missing `key` on `.map()` items → **[IMPORTANT]**
-- Prop drilling beyond two levels → **[SUGGESTION]**
-
-**Angular**
-- Observable subscription not unsubscribed → **[IMPORTANT]**
-- Business logic in template expressions → **[IMPORTANT]**
-- `ChangeDetectionStrategy.Default` where `OnPush` suffices → **[SUGGESTION]**
-- Service not `providedIn: 'root'` without explicit scope justification → **[SUGGESTION]**
-
 **Error Handling**
 - Empty `catch` block → **[IMPORTANT]**
 - Caught error accessed as `any` without type narrowing → **[IMPORTANT]**

@@ -22,7 +22,7 @@ These rules apply to all C# files in addition to the language-agnostic rules in 
 
 ## Async / Await
 
-- Always `await` Tasks; never `.Result` or `.Wait()` — they cause deadlocks.
+- Always `await` Tasks; never `.Result` or `.Wait()`.
 - Always propagate `CancellationToken` through the call chain; never ignore it.
 - Return `Task` / `Task<T>` from async methods; avoid `async void` except for event handlers.
 - Use `ConfigureAwait(false)` in library code; omit it in ASP.NET Core application code.
@@ -83,7 +83,7 @@ These rules apply to all C# files in addition to the language-agnostic rules in 
 
 ## LINQ
 
-- Prefer method syntax over query syntax for consistency.
+- Prefer method syntax over query syntax.
 - Avoid multiple enumeration of `IEnumerable<T>`; materialise with `.ToList()` or `.ToArray()` when needed.
 - Do not use LINQ inside tight loops; prefer a single query.
 
