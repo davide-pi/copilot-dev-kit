@@ -1,6 +1,7 @@
 ---
 name: generate_pr_description
 description: Generate a structured Pull Request description from the current branch diff.
+argument-hint: 'Optional: base branch to diff against (default: origin/main or origin/master)'
 tools:
   - execute
   - read
@@ -21,6 +22,10 @@ Generate a structured PR description from the current branch diff.
 
 Run `git diff origin/main...HEAD --stat` to list changed files, then `git diff origin/main...HEAD` for the full diff.
 If the base branch is not `origin/main`, use what the user specified (`$BASE`).
+
+## Step 1b – Collect commit messages
+
+Run `git log origin/main...HEAD --oneline` to get commit messages. These provide the "why" context that file diffs alone cannot reveal. Use them to populate the `## Context` section accurately.
 
 ## Step 2 – Generate the PR description
 

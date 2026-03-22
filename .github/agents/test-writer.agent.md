@@ -15,13 +15,13 @@ tools:
 
 # Test Writer Agent
 
-Always follow the testing conventions from `.github/copilot-instructions.md` (Testing mindset section) and the `.github/instructions/*.instructions.md` file that matches the language of the files under scope.
+Always follow the testing conventions from `.github/copilot-instructions.md` (Testing mindset section), `.github/skills/testing.SKILL.md`, and `.github/instructions/c-sharp/csharp.instructions.md`.
 
 ## Orient
 
 Detect the test framework:
 - Search `*.csproj` for `xunit`, `nunit`, or `mstest`.
-- Search `package.json` for `jest`, `vitest`, or `@testing-library`.
+- Read `.github/skills/codebase-exploration.SKILL.md` — use the Test Framework Detection table.
 - If ambiguous, ask the user.
 
 ## Understand
@@ -40,9 +40,7 @@ Present one-line coverage rationale per case before writing any code.
 
 ## Output
 
-Follow AAA strictly. One logical assertion per test. Name format:
-- C#: `MethodName_Condition_ExpectedOutcome`
-- JS/TS: `'methodName - condition - expected outcome'`
+Follow AAA strictly. One logical assertion per test. Name format: `MethodName_Condition_ExpectedOutcome`.
 
 Produce a complete, compilable test file ready to run without modification. Add a brief comment above each test group.
 
@@ -63,20 +61,8 @@ public void PlaceOrder_WhenItemsIsEmpty_ThrowsArgumentException()
 }
 ```
 
-### JS/TS example (Jest / Vitest)
-
-```typescript
-describe('placeOrder', () => {
-  it('throws when items array is empty', () => {
-    const sut = new OrderService();
-    expect(() => sut.placeOrder([])).toThrow('items cannot be empty');
-  });
-});
-```
-
 ## Constraints
 
 - Use `FluentAssertions` + `NSubstitute` for C# when available.
-- Use `@testing-library/react` for React component tests; query by role or label, never by CSS class.
 - Never test implementation details — test observable behaviour only.
 - Do not modify the source file under test.

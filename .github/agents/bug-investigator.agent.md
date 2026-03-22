@@ -2,11 +2,11 @@
 name: bug-investigator
 description: Bug investigation agent. Traces root causes using git history, logs, test failures, and execution-flow analysis.
 tools:
-  - agent
   - execute
   - read
   - search
   - todo
+  - web
   - vscode/askQuestions
 ---
 
@@ -23,7 +23,7 @@ Produce a **structured investigation report** with the root cause, blast radius,
 ## Protocol
 
 **Phase 0 — Orient**
-- Detect stack from manifests (`package.json`, `*.csproj`, `pyproject.toml`, `go.mod`, `pom.xml`).
+- Detect stack from manifests (`package.json`, `*.csproj`, `pyproject.toml`, `go.mod`, `pom.xml`). Read `.github/skills/codebase-exploration.SKILL.md` before mapping the layer topology.
 - Map test command: `.NET` → `dotnet test --filter`; `Node` → `npm test -- --testNamePattern`; `Python` → `pytest -k`; `Go` → `go test -run ./...`; `Java` → `mvn test -Dtest=`.
 - Note the layer topology (e.g. controller → service → repository).
 
@@ -35,7 +35,7 @@ Produce a **structured investigation report** with the root cause, blast radius,
 **Phase 2 — Trace the execution path**
 - Follow data flow through every layer; read each method fully.
 - Note: state mutations, branch conditions, error-handling gaps, async boundaries, type coercions.
-- On suspicious files: `git log --follow -p <file>`, `git blame <file>`, `git log --all --oneline -- <file>`.
+- On suspicious files: `git log --follow -p <file>`, `git blame <file>`, `git log --all --oneline -- <file>`. See `.github/skills/git-workflows.SKILL.md` for canonical git investigation commands.
 - Check env vars, feature flags, config files — environment-only bugs are often config bugs.
 - At each cross-boundary call (HTTP, broker, ORM, IPC) state the boundary and trace the callee if available.
 
@@ -110,3 +110,4 @@ Arrange / Act / Assert (omit if a test already passes)
 - Always reach Phase 5 before concluding — never stop at candidates.
 - Untraceable boundaries (external services, closed deps): reason from the interface contract and say so.
 - Ask for clarification only when the entry point cannot be determined.
+- Use `web` to search for known CVEs, bug reports, or package changelogs when the symptom matches a known library issue.

@@ -4,7 +4,7 @@ applyTo: ".github/**/*.md"
 
 # Copilot File Authoring
 
-Rules for creating and editing `.instructions.md`, `.prompt.md`, `.SKILL.md`, and `.agent.md` files.
+Rules for creating and editing `copilot-instructions.md`, `.instructions.md`, `.prompt.md`, `.SKILL.md`, and `.agent.md` files.
 
 ---
 
@@ -29,7 +29,50 @@ Rules for creating and editing `.instructions.md`, `.prompt.md`, `.SKILL.md`, an
 
 ---
 
+## When to Use Each File Type
+
+Choose the type that best fits the need — there is no single correct answer.
+
+| Type | Primary purpose |
+|------|----------------|
+| `copilot-instructions.md` | Cross-cutting rules always in context |
+| `.instructions.md` | Persistent rules auto-applied to matching files |
+| `.prompt.md` | One-shot task with explicit inputs |
+| `.SKILL.md` | Domain knowledge loaded on demand |
+| `.agent.md` | Autonomous multi-phase workflow |
+
+When in doubt, prefer the simplest type that satisfies the use case. Escalate (e.g. prompt → agent) only when the simpler type cannot express the required behaviour.
+
+---
+
+## Naming Conventions
+
+- All file names: `kebab-case`.
+- Standard paths:
+
+| Type | Path |
+|------|------|
+| Global rules | `.github/copilot-instructions.md` |
+| Instructions | `.github/instructions/<concern>.instructions.md` |
+| Language-scoped | `.github/instructions/<lang>/<concern>.instructions.md` |
+| Prompts | `.github/prompts/<name>.prompt.md` |
+| Skills | `.github/skills/<name>.SKILL.md` |
+| Agents | `.github/agents/<name>.agent.md` |
+
+- Use subfolders when scoping by language (e.g., `instructions/c-sharp/`).
+- Never place customization files outside `.github/`.
+
+---
+
 ## File-Type Rules
+
+### `copilot-instructions.md`
+
+- One file per repo, located at `.github/copilot-instructions.md`.
+- Global cross-cutting rules only — do not duplicate rules already in an `.instructions.md` file.
+- Organise into named sections (`## Clean Code`, `## Security`, etc.).
+- No frontmatter — loaded automatically by VS Code Copilot for every chat.
+- Keep total line count low; every line is always in context.
 
 ### `.instructions.md`
 
@@ -55,6 +98,30 @@ Frontmatter:
 
 - Domain knowledge only: facts, patterns, canonical examples.
 - Declarative statements, not imperatives ("Prefer X" not "You should use X").
+- No frontmatter required. If provided, only `name:` and `description:` are used.
+
+### `.agent.md`
+
+Frontmatter fields:
+
+| Field | Required | Description |
+|---|---|---|
+| `name:` | ✓ | Machine identifier (kebab-case). Used in `agents:` references. |
+| `description:` | ✓ | One-line human-readable purpose. Shown in VS Code agent picker. |
+| `tools:` | ✓ | Allowed tool categories. Valid values: `read`, `edit`, `execute`, `search`, `todo`, `agent`, `web`, `vscode/askQuestions`. |
+| `agents:` | When using `agent` tool | List of agent `name:` values this agent may delegate to. |
+| `handoffs:` | Recommended | VS Code sidebar action buttons (see format below). |
+| `user-invocable: false` | Orchestrator-only agents | Hides the agent from the user-facing agent picker. |
+
+`handoffs:` entry format:
+
+```yaml
+handoffs:
+  - label: Button label shown to user
+    agent: target-agent-name
+    prompt: 'Instruction sent to the target agent on click.'
+    send: true   # true = send immediately; false = pre-fill input box
+```
 - Keep reference tables short. Link authoritative sources when available.
 - Skills are loaded on demand — every unnecessary line costs tokens at invocation.
 
@@ -65,9 +132,15 @@ Frontmatter:
     ---
     name: <kebab-case>
     description: <one sentence, ≤120 chars — used in agent picker>
-    tools:
-      - read | search | execute | agent | todo | vscode/askQuestions  # list only what is needed
+    tools:        # list only what is needed; verify each tool exists before adding it
+      - <tool>
+    agents:       # declare every subagent this agent delegates to via the agent tool
+      - <agent-name>
     ---
+
+- Before listing any tool, confirm it is available in the current VS Code Copilot version (`tool_search_tool_regex` or the agent picker).
+- Remove tools that are no longer available; never assume a tool still exists across updates.
+- Request only the minimum set of tools the agent actually needs.
 
 - Reference `copilot-instructions.md` and relevant `instructions/` files; **never duplicate** their rules.
 - Structure as phases: **Orient → Understand → Analyse → Output**.
@@ -88,3 +161,7 @@ Before saving any Copilot file, verify:
 | Paths verified | Every referenced path exists in the workspace |
 | No padding | No intro/outro sentences; no filler phrases |
 | Shortest form | Content cannot be cut further without losing meaning |
+| Tool names valid | Every tool in `.agent.md` verified via `tool_search_tool_regex` or the agent picker |
+| `applyTo` not over-broad | `**` used only when the rule is genuinely cross-cutting |
+| Agent phases complete | All four phases present: Orient → Understand → Analyse → Output |
+| `agents:` declared | Every subagent invoked via the `agent` tool is listed in `agents:` |
