@@ -32,9 +32,6 @@
 #### Tech: {Tech Name}
 *{One-sentence description of what this tech delivers and how it is testable.}*
 
-- [ ] Task 1 — {description}
-- [ ] Task 2 — {description}
-
 #### Tech: {Tech Name}
 *{…}*
 
@@ -88,9 +85,9 @@
 
 | Test Type | Scope | Framework | Priority |
 |---|---|---|---|
-| Unit | {what to test} | {framework} | 🔴/🟡/🟢 |
-| Integration | {what to test} | {framework} | 🔴/🟡/🟢 |
-| E2E | {what to test} | {framework} | 🔴/🟡/🟢 |
+| Unit | {what to test} | {framework} | 🔴 High / 🟡 Med / 🟢 Low |
+| Integration | {what to test} | {framework} | 🔴 High / 🟡 Med / 🟢 Low |
+| E2E | {what to test} | {framework} | 🔴 High / 🟡 Med / 🟢 Low |
 
 **Coverage targets:**
 - Happy path: {description}

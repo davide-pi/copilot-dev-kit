@@ -18,11 +18,11 @@ agents:
   - quality-assurance-dev
   - code-reviewer
 handoffs:
-  - label: Start Implementation
+  - label: Implement
     agent: senior-dev
     prompt: 'Implement the plan task by task, with user checkpoints after each task.'
     send: true
-  - label: Start Implementation (Full)
+  - label: Implement (Parallel)
     agent: senior-dev
     prompt: 'Implement the whole plan, in parallel when possible, with user checkpoints only at the end.'
     send: true
@@ -113,11 +113,11 @@ After `plan-writer` completes:
 
 ```
 Review the plan above.
-• Start Implementation — to proceed with implementation
+• Implement — to proceed with implementation
 • {change description} — to request modifications
 ```
 
-3. On Start Implementation: invoke `plan-writer` in `status-update` mode with `Approved`, then proceed to Phase 3.
+3. On Implement: invoke `plan-writer` in `status-update` mode with `Approved`, then proceed to Phase 3.
 4. On change request: execute the **Plan Change Protocol** (see below).
 
 ### Phase 3 — Implementation
@@ -130,7 +130,7 @@ Implementation complete. Run QA test implementation? (yes / no)
 ```
 
 3. If yes: invoke `quality-assurance-dev` with the plan file path.
-4. After QA dev completes, optionally offer code review:
+4. After QA dev completes, optionally offer a **pipeline-end code review** (distinct from the per-tech code review available to `senior-dev` during implementation):
 
 ```
 Tests implemented. Run code review on the implemented files? (yes / no)

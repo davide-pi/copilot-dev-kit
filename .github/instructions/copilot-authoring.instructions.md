@@ -122,26 +122,10 @@ handoffs:
     prompt: 'Instruction sent to the target agent on click.'
     send: true   # true = send immediately; false = pre-fill input box
 ```
-- Keep reference tables short. Link authoritative sources when available.
-- Skills are loaded on demand — every unnecessary line costs tokens at invocation.
-
-### `.agent.md`
-
-Frontmatter:
-
-    ---
-    name: <kebab-case>
-    description: <one sentence, ≤120 chars — used in agent picker>
-    tools:        # list only what is needed; verify each tool exists before adding it
-      - <tool>
-    agents:       # declare every subagent this agent delegates to via the agent tool
-      - <agent-name>
-    ---
-
 - Before listing any tool, confirm it is available in the current VS Code Copilot version (`tool_search_tool_regex` or the agent picker).
 - Remove tools that are no longer available; never assume a tool still exists across updates.
 - Request only the minimum set of tools the agent actually needs.
-
+- MCP server tools can also be listed using `<server>/<tool>` or `<server>/*` notation (e.g. `microsoftdocs/mcp/*`).
 - Reference `copilot-instructions.md` and relevant `instructions/` files; **never duplicate** their rules.
 - Structure as phases: **Orient → Understand → Analyse → Output**.
 - Output section must specify the exact format (table columns, markdown structure, code block type).

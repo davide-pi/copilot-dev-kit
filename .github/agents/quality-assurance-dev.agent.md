@@ -12,6 +12,11 @@ tools:
   - agent
 agents:
   - test-writer
+handoffs:
+  - label: Run Code Review
+    agent: code-reviewer
+    prompt: 'Review the implemented files listed in ## Implementation Progress of the plan file.'
+    send: true
 ---
 
 # Quality Assurance Dev Agent

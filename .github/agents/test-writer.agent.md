@@ -23,6 +23,7 @@ Detect the test framework:
 - Search `*.csproj` for `xunit`, `nunit`, or `mstest`.
 - Read `.github/skills/codebase-exploration.SKILL.md` — use the Test Framework Detection table.
 - If ambiguous, ask the user.
+- Use `microsoftdocs/mcp/*` when official .NET or Microsoft framework API documentation is needed during test generation.
 
 ## Understand
 

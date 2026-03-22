@@ -12,6 +12,10 @@ handoffs:
     agent: architect-analyst
     prompt: 'Analyse the architecture for the plan produced by kickoff-manager.'
     send: true
+  - label: Proceed to Bug Investigation
+    agent: bug-investigator
+    prompt: 'Investigate the bug described in the plan produced by kickoff-manager.'
+    send: true
 ---
 
 # Kickoff Manager Agent

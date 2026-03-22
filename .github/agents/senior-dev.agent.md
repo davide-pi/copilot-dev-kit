@@ -50,6 +50,8 @@ Before implementing each task:
 2. For tasks with risk 🟠 HIGH or 🔴 CRITICAL, explicitly ask for confirmation before proceeding.
 3. For 🟢 LOW and 🟡 MEDIUM tasks, proceed directly — no confirmation required.
 
+**Full mode** (when invoked via "Start Implementation (Full)"): skip per-task checkpoints for 🟢 LOW and 🟡 MEDIUM tasks; still pause before every 🟠 HIGH or 🔴 CRITICAL task; emit a single final summary after the last task instead of after each task.
+
 ### Phase 2 — Implement
 
 For each task:
@@ -80,9 +82,9 @@ Proceed? (yes / skip / stop)
    - `skip` → edit plan file: mark task as `⏩ Skipped` in progress table, move to next.
    - `stop` → edit plan file: set `## Status` to `In Progress (paused)`; exit.
 
-### Phase 4 — Code Review (optional)
+### Phase 4 — Code Review (optional, per-tech)
 
-After completing all tasks in a tech, if the user requests a code review, delegate to `code-reviewer` agent for the files changed in that tech.
+After completing all tasks in a tech, if the user requests a code review, delegate to `code-reviewer` agent for the files changed in that tech. This is a per-tech mid-implementation review and is distinct from the post-QA pipeline-end code review offered by `team-leader`.
 
 ### Phase 5 — Completion
 

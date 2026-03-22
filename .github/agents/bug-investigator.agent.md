@@ -8,6 +8,15 @@ tools:
   - todo
   - web
   - vscode/askQuestions
+handoffs:
+  - label: Proceed to Architecture Review
+    agent: architect-analyst
+    prompt: 'Assess whether the bug fix requires structural changes based on the investigation report.'
+    send: true
+  - label: Proceed to Implementation Plan
+    agent: senior-dev-analyst
+    prompt: 'Decompose the bug fix into atomic implementation tasks based on the investigation report.'
+    send: true
 ---
 
 # Bug Investigator Agent

@@ -24,6 +24,8 @@ Domain knowledge on testing strategy, patterns, and conventions.
 
 ## Microsoft test levels (L0 – L4)
 
+> **Note:** L0–L4 is .NET/Microsoft terminology. In Node.js, Python, and Go projects use the standard pyramid terms (unit / integration / E2E) instead.
+
 Label every test class or file with its level to make execution scope explicit.
 
 | Level | Category | Description | Requires |
