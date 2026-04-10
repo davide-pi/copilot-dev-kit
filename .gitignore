@@ -1,0 +1,58 @@
+# ======================
+# Editor & IDE
+# ======================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ======================
+# Copilot & Agent
+# ======================
+# Keep instructions and skill files, ignore generated/cache artifacts
+.copilot/
+.github/copilot-debug/
+*.copilot-log
+
+# ======================
+# Secrets & Credentials
+# ======================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.secret
+secrets/
+credentials/
+
+# ======================
+# OS artifacts
+# ======================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ======================
+# Logs & temp files
+# ======================
+*.log
+*.tmp
+*.temp
+temp/
+tmp/
+
+# ======================
+# Dependency / build dirs
+# ======================
+node_modules/
+__pycache__/
+*.py[cod]
+dist/
+build/
+.cache/
