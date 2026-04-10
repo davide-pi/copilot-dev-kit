@@ -67,6 +67,8 @@ your-project/
     │   │   └── SKILL.md                 ← stress-test plans with relentless interviews
     │   ├── plan-blueprint/
     │   │   └── SKILL.md                 ← structured implementation plans with risk levels
+    │   ├── ubiquitous-language/
+    │   │   └── SKILL.md                 ← extract DDD-style glossary and harden domain terminology
     │   └── write-a-skill/
     │       └── SKILL.md                 ← create new skills with proper structure
     └── prompts/                         # coming soon
@@ -109,6 +111,7 @@ Copy `.prompt.md` files into `.github/prompts/`. They surface as slash commands 
 |---|---|
 | **grill-me** | Relentless design interview mode — walks every branch of the decision tree until shared understanding is reached, then produces a Decision Summary with decisions, dependencies, and accepted trade-offs |
 | **plan-blueprint** | Produces a structured, atomic implementation plan with risk levels, dependency diagrams, and a summary table |
+| **ubiquitous-language** | Extracts a DDD-style ubiquitous language glossary from the conversation, flags ambiguities and synonyms, proposes canonical terms, and saves to `UBIQUITOUS_LANGUAGE.md` |
 | **write-a-skill** | Process and templates for creating new `SKILL.md` files with proper structure, progressive disclosure, and bundled resources |
 
 ---
