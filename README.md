@@ -1,5 +1,3 @@
-# copilot-dev-kit
-Personal toolkit of agents, instructions, prompts and skills to improve my usage of GitHub Copilot across my daily development workflow.
 # 🤖 copilot-dev-kit
 
 > A personal, curated toolkit to get the most out of GitHub Copilot — instructions, custom agents, skills, and prompt templates refined through real daily dev work.
@@ -8,7 +6,6 @@ Personal toolkit of agents, instructions, prompts and skills to improve my usage
 
 ## Table of contents
 
-- [copilot-dev-kit](#copilot-dev-kit)
 - [🤖 copilot-dev-kit](#-copilot-dev-kit)
   - [Table of contents](#table-of-contents)
   - [📦 What's inside](#-whats-inside)
@@ -34,8 +31,10 @@ Personal toolkit of agents, instructions, prompts and skills to improve my usage
 |---|---|
 | `.github/instructions/` | Reusable `.instructions.md` files — always-on rules scoped by file pattern |
 | `.github/agents/` | Custom agent definitions (`.agent.md`) for specialised workflows |
+| `.github/agents/` | Custom agent definitions (`.agent.md`) for specialised workflows *(coming soon)* |
 | `.github/skills/` | `SKILL.md` definitions that package domain knowledge loaded on demand by agents |
 | `.github/prompts/` | Reusable `.prompt.md` templates for common dev tasks — use as slash commands in Copilot Chat |
+| `.github/prompts/` | Reusable `.prompt.md` templates for common dev tasks — use as slash commands in Copilot Chat *(coming soon)* |
 
 ---
 
@@ -63,10 +62,15 @@ your-project/
     ├── instructions/
     │   └── voice.instructions.md        ← feedback tone & communication style
     ├── agents/
+    ├── agents/                          # coming soon
     ├── skills/
+    │   ├── grill-me/
+    │   │   └── SKILL.md                 ← stress-test plans with relentless interviews
     │   └── write-a-skill/
     │       └── SKILL.md                 ← how to create new skills
     └── prompts/
+    │       └── SKILL.md                 ← create new skills with proper structure
+    └── prompts/                         # coming soon
 ```
 
 ### Custom instructions
@@ -77,6 +81,8 @@ Copy `.instructions.md` files into `.github/instructions/`. Copilot picks them u
 
 Copy `.agent.md` files into `.github/agents/`. In VS Code, open Copilot Chat and select the agent from the mode picker (the dropdown next to the chat input). Each agent file defines its name, description, available tools, and system prompt.
 
+> No agents yet — coming soon.
+
 ### Skills
 
 Copy `SKILL.md` files into `.github/skills/<skill-name>/`. Skills package domain knowledge that agents load on demand by calling `read_file` — they never inflate the always-on context window.
@@ -84,6 +90,8 @@ Copy `SKILL.md` files into `.github/skills/<skill-name>/`. Skills package domain
 ### Prompts
 
 Copy `.prompt.md` files into `.github/prompts/`. They surface as slash commands in Copilot Chat. Keep these to lightweight, one-shot workflows — anything requiring multi-step state belongs in an agent instead.
+
+> No prompts yet — coming soon.
 
 ---
 
@@ -99,6 +107,7 @@ Copy `.prompt.md` files into `.github/prompts/`. They surface as slash commands 
 
 | Name | What it packages |
 |---|---|
+| **grill-me** | Relentless design interview mode — walks every branch of the decision tree until shared understanding is reached, then produces a Decision Summary with decisions, dependencies, and accepted trade-offs |
 | **write-a-skill** | Process and templates for creating new `SKILL.md` files with proper structure, progressive disclosure, and bundled resources |
 
 ---
