@@ -30,10 +30,8 @@
 | Folder | Description |
 |---|---|
 | `.github/instructions/` | Reusable `.instructions.md` files — always-on rules scoped by file pattern |
-| `.github/agents/` | Custom agent definitions (`.agent.md`) for specialised workflows |
 | `.github/agents/` | Custom agent definitions (`.agent.md`) for specialised workflows *(coming soon)* |
 | `.github/skills/` | `SKILL.md` definitions that package domain knowledge loaded on demand by agents |
-| `.github/prompts/` | Reusable `.prompt.md` templates for common dev tasks — use as slash commands in Copilot Chat |
 | `.github/prompts/` | Reusable `.prompt.md` templates for common dev tasks — use as slash commands in Copilot Chat *(coming soon)* |
 
 ---
@@ -61,14 +59,15 @@ your-project/
 └── .github/
     ├── instructions/
     │   └── voice.instructions.md        ← feedback tone & communication style
-    ├── agents/
+    │   ├── voice.instructions.md        ← feedback tone & communication style
+    │   └── ef-migrations.instructions.md ← EF Core migration rules via dotnet ef CLI
     ├── agents/                          # coming soon
     ├── skills/
     │   ├── grill-me/
     │   │   └── SKILL.md                 ← stress-test plans with relentless interviews
+    │   ├── plan-blueprint/
+    │   │   └── SKILL.md                 ← structured implementation plans with risk levels
     │   └── write-a-skill/
-    │       └── SKILL.md                 ← how to create new skills
-    └── prompts/
     │       └── SKILL.md                 ← create new skills with proper structure
     └── prompts/                         # coming soon
 ```
@@ -102,12 +101,14 @@ Copy `.prompt.md` files into `.github/prompts/`. They surface as slash commands 
 | Name | `applyTo` | What it does |
 |---|---|---|
 | **voice.instructions.md** | `**` | Enforces direct, critical feedback — no filler, exact problem + reason + fix |
+| **ef-migrations.instructions.md** | `**/*.cs` | Mandates `dotnet ef` CLI for all EF Core migrations — no manual file creation or edits to generated files |
 
 ### Skills
 
 | Name | What it packages |
 |---|---|
 | **grill-me** | Relentless design interview mode — walks every branch of the decision tree until shared understanding is reached, then produces a Decision Summary with decisions, dependencies, and accepted trade-offs |
+| **plan-blueprint** | Produces a structured, atomic implementation plan with risk levels, dependency diagrams, and a summary table |
 | **write-a-skill** | Process and templates for creating new `SKILL.md` files with proper structure, progressive disclosure, and bundled resources |
 
 ---
