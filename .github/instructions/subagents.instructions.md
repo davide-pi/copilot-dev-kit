@@ -3,67 +3,56 @@ applyTo: "**"
 description: "Instructions for managing work with subagents orchestrating them effectively."
 ---
 
-# Subagents Orchestration Instructions
+# Subagents Orchestration
 
 ## Task Decomposition
 
 Before starting any non-trivial task:
-1. Break it into **atomic subtasks** — each with a single, well-defined responsibility.
+1. Break into **atomic subtasks** — single responsibility each.
 2. Identify dependencies between subtasks.
 3. Group independent subtasks for **parallel execution**.
-4. Assign each subtask to the most **specialized subagent** available. If none, assign to a generalist subagent.
+4. Assign to the most **specialized subagent** available; fall back to generalist.
 
-> Prefer parallelism over sequencing whenever tasks share no output dependency and the user does not require step-by-step updates.
-
----
+> Prefer parallelism over sequencing when tasks share no output dependency.
 
 ## Spawning Subagents
 
-When delegating to a subagent, provide **only**:
-- The atomic task description
-- The minimal required context (relevant file excerpts, types, interfaces, error messages — nothing else)
-- The expected output format (see below)
-- Whether output is for the orchestrator or the user
+Provide **only**:
+- Atomic task description
+- Minimal required context (relevant excerpts, types, error messages)
+- Expected output format
+- Whether output targets the orchestrator or the user
 
-**Do not pass:** full file contents, unrelated history, UI descriptions, or any context the subagent does not need to complete its task.
-
----
+**Never pass:** full file contents, unrelated history, UI descriptions, or unnecessary context.
 
 ## Subagent Response Format
 
-### Output → Orchestrator (default)
-Respond in compact, machine-friendly format:
-- Use structured data (JSON, key:value, bullet lists) — no prose
-- Omit preamble, conclusions, and filler phrases
-- Include only: result, status, errors/warnings, and any blocking dependencies
-- Flag uncertainty explicitly: `UNCERTAIN: <reason>`
+### → Orchestrator (default)
+Compact, machine-friendly:
+- Structured data (JSON, key:value, bullet lists) — no prose
+- Include only: result, status, errors/warnings, blocking dependencies
+- Flag uncertainty: `UNCERTAIN: <reason>`
 
-Example:
 ```
 STATUS: ok
-RESULT: refactored `parseUser()` to return `Result<User, ParseError>`
+RESULT: refactored `parseUser()` → `Result<User, ParseError>`
 CHANGED_FILES: src/user.ts
 WARNINGS: none
 ```
 
-### Output → User
-Use clear, human-readable prose. Summarize actions taken, highlight decisions made, and surface relevant caveats. But don't be prolix — be concise and to the point.
-
----
+### → User
+Concise human-readable prose. Summarize actions, highlight decisions, surface caveats.
 
 ## Orchestrator Responsibilities
 
-- Merge subagent outputs and resolve conflicts before acting on them
-- Do not re-explain subagent results verbatim — synthesize
-- If a subagent returns `UNCERTAIN` or an error, retry with a narrower scope or escalate to the user
-- Track which subtasks are complete, pending, or blocked
+- Merge and synthesize subagent outputs — do not echo verbatim
+- On `UNCERTAIN` or error: retry with narrower scope or escalate to user
+- Track subtask status: complete, pending, blocked
 
----
+## Anti-patterns
 
-## Anti-patterns (avoid)
-
-- Passing entire codebases or long files to a subagent when a snippet suffices
+- Passing entire files when a snippet suffices
 - Sequential execution of parallelizable tasks
-- Asking a general agent to do work a specialized one can handle
-- Verbose subagent responses when output goes to the orchestrator
+- General agent doing specialized work
+- Verbose subagent responses to orchestrator
 - Redundant context across sibling subagents

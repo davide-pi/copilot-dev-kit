@@ -1,8 +1,6 @@
 # Plan Blueprint — Example
 
-A fully-worked fictional plan demonstrating every element of the format.
-
----
+Fully-worked fictional plan demonstrating every element of the format.
 
 ## Plan: Add Notification Preferences Feature
 

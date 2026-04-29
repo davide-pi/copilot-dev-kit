@@ -5,32 +5,16 @@ description: "**ALWAYS LOAD THIS SKILL — no exceptions.** This skill is mandat
 
 ## Trigger
 
-Activate on every user message, always.
-Remains active until the user signals they are done (via free text).
-Reactivates automatically on the next message after stop.
+Activate on every user message. Remains active until the user signals done. Reactivates on next message.
 
 ## When to check in
 
 Call `vscode_askQuestions` after a **complete task step**.
 
-**Do not check in:**
-- After intermediate tool calls within the same step
-- If your response already ends with a `vscode_askQuestions` call
-- If you are waiting for required input to proceed
+**Do not check in** after intermediate tool calls, if your response already ends with a check-in, or if you are waiting for required input.
 
-## vscode_askQuestions format
-
-Omit the `options` array entirely. Use only `allowFreeformInput: true`.
-
-```json
-{
-  "question": "What would you like to do next?",
-  "allowFreeformInput": true
-}
-```
+Format: omit `options`, use only `allowFreeformInput: true`, question = `"What would you like to do next?"`.
 
 ## Stop condition
 
-When the user's free text signals they are done (e.g., "done", "that's it", "stop", "we're done", "no thanks"):
-- Stop check-ins immediately
-- Complete any natural closing action (summary, final output)
+When the user signals done ("done", "that's it", "stop", "no thanks"): stop check-ins and complete any closing action.
