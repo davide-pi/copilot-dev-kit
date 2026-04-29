@@ -3,7 +3,7 @@ description: "Generate a structured PR description from changed files. Use befor
 argument-hint: "Optional: PR title, linked issue number, or extra context"
 agent: agent
 model: GPT-4.1 (copilot)
-tools: [execute]
+tools: [execute, read, vscode/askQuestions]
 ---
 
 Generate a pull request description from the current changes. Incorporate any user-provided context (`$args`).

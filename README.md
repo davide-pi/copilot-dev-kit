@@ -12,6 +12,10 @@ Everything here is something I actually use. The goal is to shape Copilot into a
 
 ## What's Inside
 
+### Agents (`.github/agents/`)
+
+Custom agent modes with focused system prompts and tool access for specific workflows (e.g. code review).
+
 ### Instructions (`.github/instructions/`)
 
 Markdown files declaring rules for agent behavior. Always-on or scoped to file types via `applyTo` frontmatter (e.g. `**/*.cs`).
